@@ -13,3 +13,15 @@ and it will give you back:
 `{"ip":"123.456.789.9"}` Or whatever your public IP address is.
 
 If for some reason `curl` is not installed, you can perform `apt-get install curl` to download and install it.
+
+## Python
+You can make API request sin Python using the `requests` module.
+
+```
+from requests import get
+
+ip = get('https://api.ipify.org').text
+print('My public IP address is: {}'.format(ip))
+```
+
+If the requests library is not installed, the you can download and install it with `apt-get install python-requests`
