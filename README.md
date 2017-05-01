@@ -37,3 +37,12 @@ require "net/http"
 ip = Net::HTTP.get(URI("https://api.ipify.org"))
 puts "My public IP Address is: " + ip
 ```
+
+You can also use the `rest-client` library by using `apt-get install ruby-rest-client and do this:
+```
+require 'rest-client'
+response = RestClient.get 'https://api.ipify.org'
+puts 'My public IP Address is: ' + response
+```
+
+For more information and examples for `rest`client`, visit: https://github.com/rest-client/rest-client
