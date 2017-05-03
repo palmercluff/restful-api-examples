@@ -6,6 +6,8 @@ These examples and files aren't necesserily exclusive to Debian-based systems, b
 ## Introduction
 A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. (http://searchcloudstorage.techtarget.com/definition/RESTful-API) The following are examples of how to make the API's and API requests.
 
+A great tool for testing to see if you are making requests correctly is to use: https://httpbin.org
+
 Especially in web development, the ideal way to make a RESTful API request is to d it from the backend using something other than JavaScript. The reason for this is you can't always make a request from the browser because CORS headers are required. Better to use a backend technology such as shell, Python, Ruby, or something else.
 
 ## Basic GET API Requests
@@ -81,3 +83,14 @@ my $ua = new LWP::UserAgent();
 my $ip = $ua->get('https://api.ipify.org')->content;
 print 'My public IP address is: '. $ip;
 ```
+
+### Lua
+In order to do API requests, some libraries will need to be installed.
+
+The `lua-socket` library can be used:
+```
+https = require "socket.http"
+r, c, h, s = https.request("https://api.ipify.org")
+print('My public IP address is: ' .. r)
+```
+To install `lua-socket`, perform an `apt-get install lua-socket`
