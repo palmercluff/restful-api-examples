@@ -89,8 +89,8 @@ In order to do API requests, some libraries will need to be installed.
 
 The `lua-socket` library can be used:
 ```
-https = require "socket.http"
-r, c, h, s = https.request("https://api.ipify.org")
+http = require "socket.http"
+r, c, h, s = http.request("http://api.ipify.org")
 print('My public IP address is: ' .. r)
 ```
-To install `lua-socket`, perform an `apt-get install lua-socket`
+But this only supports HTTP requests, not SSL/HTTPS. To install `lua-socket`, perform an `apt-get install lua-socket`
