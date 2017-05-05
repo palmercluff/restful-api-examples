@@ -105,7 +105,18 @@ print(status)
 Install LuaSec with `apt-get install lua-sec`.
 
 ## Basic GET API Servers
-We make API requests to get information that would otherwise be difficult to get ourselves. With that said, if you were to look at the server API code, it could get complicated really quick. But theoretically, getting a simple API server set up is really quite easy, it just depends on what you are doing. The following ill show you how to send back a string of text when it is requested from a client. I put my server scripts in my `/var/www/html/` directory since I use the Apache2 web server. I can access my server scripts via `http://localhost/whatever_the_name_of_the_server_script_is.file_name`. I'll show you a PHP version of this first since it is super simple.
+We make API requests to get information that would otherwise be difficult to get ourselves. With that said, if you were to look at the server API code, it could get complicated really quick. But theoretically, getting a simple API server set up is really quite easy, it just depends on what you are doing. The following will show you how to send back a string of text when it is requested from a client. I'll show you a PHP version of this first since it is super simple.
+
+THIS IS IMPORTANT!!!A lot of this actually depends on the framework you are using. With PHP you can just put PHP files in the `/var/www/html/` directory to get it to run, but in order for other server-side scripts to run, they may need to be placed in the `/usr/lib/cgi-bin/` in order to execute. If that directory is not available, you can do the following to perform cgi-requests(assuming you have root access):
+```
+a2enmod cgi
+service apache2 restart
+```
+You must also give your server-side scripts execution rights with the following: `chmod +x whatever_the_name_of_the_server_script_is.file_name`.
+
+Then, you can access run the script via: `http://localhost/cgi-bin/whatever_the_name_of_the_server_script_is.file_name`.
+
+It is also importany to note that you don't need a special client to access these server-based API's. You can just use your web browser and type the URL.
 
 ### PHP
 Our simple PHP script can look like this stored in the `/var/www/html/` directory with the filename `php_api_server.php`:
@@ -125,3 +136,48 @@ message = get('http://localhost/php_api_server.php').text
 print('The server says: {}'.format(message))
 ```
 It should give us back: `The server says: Hello from the server!`
+
+You could also place that PHP server script in the `/usr/lib/cgi-bin/` (which is actually preffered) and navigate the request to `http://localhost/cgi-bin/php_api_server.php`.
+
+### Python
+Server-side Python script:
+```
+#!/usr/bin/python
+print('Content-type: text/html\n')
+print('Hello from the server!')
+```
+- Make sure to include the first line: `#!/usr/bin/python`
+- Make sure you have this line: `print('Content-type: text/html\n')`
+- Place it in the `/usr/lib/cgi-bin/` directory
+- Give it execution rights with `chmod +x python_api_server.py`
+
+Ruby client-side script:
+```
+require "net/http"
+
+message = Net::HTTP.get(URI("http://localhost/cgi-bin/python_api_server.py"))
+puts "The server says: " + message
+```
+Should give you the message: `The server says: Hello from the server!`
+
+### Perl
+Server-side script:
+```
+#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+print "Hello from the server!";
+```
+- Make sure to include the first line: `#!/usr/bin/perl`
+- Make sure you have this line: `print "Content-type: text/html\n\n";`
+- Place it in the `/usr/lib/cgi-bin/` directory
+- Give it execution rights with `chmod +x perl_api_server.py`
+
+Lua client-side script:
+```
+http = require "socket.http"
+r, c, h, s = http.request("http://localhost/cgi-bin/perl_api_server.pl")
+print('The server says: ' .. r)
+```
+Should give you the message: `The server says: Hello from the server!`
+
+I think you get the general idea...
