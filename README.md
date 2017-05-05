@@ -1,5 +1,5 @@
 # restful-api-examples
-Examples of how to perform RESTful API requests from Debian-based systems using different languages and bindings.
+Examples of how to call and serve RESTful API requests from Debian-based systems using different languages and bindings.
 
 These examples and files aren't necesserily exclusive to Debian-based systems, but the aptitude (apt) packaging system is. In order to install some of these libraries, you need to obtain the software in some other way.
 
