@@ -10,7 +10,7 @@ A great tool for testing to see if you are making requests correctly is to use: 
 
 Especially in web development, the ideal way to make a RESTful API request is to d it from the backend using something other than JavaScript. The reason for this is you can't always make a request from the browser because CORS headers are required. Better to use a backend technology such as shell, Python, Ruby, or something else.
 
-## Basic GET API Requests
+## Basic GET API Clients
 The GET method is probably the easiest HTTP method to work with. The following will use the ipify API that simply gives you back your public IP address. Later on we will use some different and unique API's to experiment with.
 
 ### Shell
@@ -94,3 +94,34 @@ r, c, h, s = http.request("http://api.ipify.org")
 print('My public IP address is: ' .. r)
 ```
 But this only supports HTTP requests, not SSL/HTTPS. To install `lua-socket`, perform an `apt-get install lua-socket`
+
+For HTTPS requests, you can use the `lua-sec` package and do something like this:
+```
+require("socket")
+local https = require("ssl.https")
+local body, code, headers, status = https.request("https://www.google.com")
+print(status)
+```
+Install LuaSec with `apt-get install lua-sec`.
+
+## Basic GET API Servers
+We make API requests to get information that would otherwise be difficult to get ourselves. With that said, if you were to look at the server API code, it could get complicated really quick. But theoretically, getting a simple API server set up is really quite easy, it just depends on what you are doing. The following ill show you how to send back a string of text when it is requested from a client. I put my server scripts in my `/var/www/html/` directory since I use the Apache2 web server. I can access my server scripts via `http://localhost/whatever_the_name_of_the_server_script_is.file_name`. I'll show you a PHP version of this first since it is super simple.
+
+### PHP
+Our simple PHP script can look like this stored in the `/var/www/html/` directory with the filename `php_api_server.php`:
+```
+<?php
+  echo 'Hello from the server!';
+?>
+```
+
+then if we have a Python client like this calling the PHP server script
+```
+# This example requires the requests library be installed.  You can learn more
+# about the Requests library here: http://docs.python-requests.org/en/latest/
+from requests import get
+
+message = get('http://localhost/php_api_server.php').text
+print('The server says: {}'.format(message))
+```
+It should give us back: `The server says: Hello from the server!`
