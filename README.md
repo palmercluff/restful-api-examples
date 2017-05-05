@@ -3,6 +3,11 @@ Examples of how to call and serve RESTful API requests from Debian-based systems
 
 These examples and files aren't necesserily exclusive to Debian-based systems, but the aptitude (apt) packaging system is. In order to install some of these libraries, you need to obtain the software in some other way.
 
+## Index
+
+* [Basic Get API Clients](#basic-get-api-clients)
+* [Basic GET API Servers](#basic-get-api-servers)
+
 ## Introduction
 A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. (http://searchcloudstorage.techtarget.com/definition/RESTful-API) The following are examples of how to make the API's and API requests.
 
