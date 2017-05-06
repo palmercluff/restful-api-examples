@@ -5,13 +5,15 @@ These examples and files aren't necesserily exclusive to Debian-based systems, b
 
 ## Index
 
-* [Basic Get API Clients](#basic-get-api-clients)
+* [Basic GET API Clients](#basic-get-api-clients)
 * [Basic GET API Servers](#basic-get-api-servers)
 
 ## Introduction
 A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. (http://searchcloudstorage.techtarget.com/definition/RESTful-API) The following are examples of how to make the API's and API requests.
 
 A great tool for testing to see if you are making requests correctly is to use: https://httpbin.org
+
+A great list of public API's can be found here: https://github.com/toddmotto/public-apis
 
 Especially in web development, the ideal way to make a RESTful API request is to d it from the backend using something other than JavaScript. The reason for this is you can't always make a request from the browser because CORS headers are required. Better to use a backend technology such as shell, Python, Ruby, or something else.
 
@@ -25,6 +27,11 @@ The GET method is probably the easiest HTTP method to work with. The following w
 
 ip=$(curl -s https://api.ipify.org)
 echo "My public IP address is: $ip"
+```
+
+Here is an API request that gives back JSON objects full of information on Studio Ghibli films:
+```
+curl -X GET -H "Content-Type: application/json" https://ghibliapi.herokuapp.com/films
 ```
 
 If for some reason `curl` is not installed, you can perform `apt-get install curl` to download and install it.
@@ -185,4 +192,4 @@ print('The server says: ' .. r)
 ```
 Should give you the message: `The server says: Hello from the server!`
 
-I think you get the general idea...
+I think you get the general idea. Depending on what kind of data the client is expecting to receive back from the server, the content type needs to be specified. In the previous examples we are just sending back plain text, but other popular types of data are JSON, XML, and more!
