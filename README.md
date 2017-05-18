@@ -137,6 +137,13 @@ namespace Ipify.Examples {
 ```
 Compile via: `C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe C#_API_Client.cs` which will create a .exe program.
 
+### Windows PowerShell
+REST API networking is also built into PowerShell
+```
+$ip = Invoke-RestMethod -Uri 'https://api.ipify.org?format=json'
+"My public IP address is: $($ip.ip)"
+```
+
 ## Basic GET API Servers
 We make API requests to get information that would otherwise be difficult to get ourselves. With that said, if you were to look at the server API code, it could get complicated really quick. But theoretically, getting a simple API server set up is really quite easy, it just depends on what you are doing. The following will show you how to send back a string of text when it is requested from a client. I'll show you a PHP version of this first since it is super simple.
 
