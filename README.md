@@ -116,6 +116,27 @@ print(status)
 ```
 Install LuaSec with `apt-get install lua-sec`.
 
+### C#
+Networking is bult into the .NET framework. The code below was ran using version 4.7 .NET which supports language versions up to C# 5.
+```
+// C#_API_Client.cs
+
+using System;
+using System.Net;
+
+namespace Ipify.Examples {
+  class Program {
+    public static void Main (string[] args) {
+      WebClient webClient = new WebClient();
+      string publicIp = webClient.DownloadString("https://api.ipify.org");
+      Console.WriteLine("My public IP Address is: {0}", publicIp);
+    }
+  }
+}
+
+```
+Compile via: `C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe C#_API_Client.cs` which will create a .exe program.
+
 ## Basic GET API Servers
 We make API requests to get information that would otherwise be difficult to get ourselves. With that said, if you were to look at the server API code, it could get complicated really quick. But theoretically, getting a simple API server set up is really quite easy, it just depends on what you are doing. The following will show you how to send back a string of text when it is requested from a client. I'll show you a PHP version of this first since it is super simple.
 
