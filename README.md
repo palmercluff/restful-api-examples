@@ -75,6 +75,18 @@ To perform a GET request, you can use the `file_get_contents()` function
 ```
 PHP is usualy ran via website actions, but you can execute this script via `php php_api_client.php` from the terminal.
 
+### Node.js
+In the terminal, run `node node_api_client.js` or `nodejs node_api_client.js`
+```
+var http = require('http');
+
+http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
+    resp.on('data', function(ip) {
+        console.log("My public IP address is: " + ip);
+    });
+});
+```
+
 ### Java
 ```
 try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://api.ipify.org").openStream(), "UTF-8").useDelimiter("\\A")) {
